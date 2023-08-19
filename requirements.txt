@@ -2,4 +2,4 @@ pandas
 streamlit_pandas_profiling
 pandas_profiling
 pycaret
-sklearn
+scikit-learn
