@@ -3,3 +3,4 @@ streamlit_pandas_profiling
 pandas_profiling
 pycaret
 scikit-learn
+numba=0.59.0
