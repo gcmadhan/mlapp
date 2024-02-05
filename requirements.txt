@@ -2,5 +2,5 @@ pandas
 streamlit_pandas_profiling
 pandas_profiling
 pycaret
-scikit-learn
 numba==0.46.0
+scikit-learn
