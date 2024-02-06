@@ -1,5 +1,4 @@
 pandas
-pyLDAvis
 scikit-learn
 streamlit_pandas_profiling
 pandas_profiling
