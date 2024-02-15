@@ -1,5 +1,4 @@
 pandas
 scikit-learn
 streamlit_pandas_profiling
-pycaret
-numba==0.46.0
+ydata-profiling
