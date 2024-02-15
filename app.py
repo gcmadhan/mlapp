@@ -1,8 +1,10 @@
+import ydata_profiling 
+from ydata_profiling import ProfileReport
 import streamlit as st
-#from streamlit_pandas_profiling import st_profile_report
-#import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report
 from pycaret.classification import *
 from sklearn.datasets import load_iris
+
 
 
 import pandas as pd
@@ -11,12 +13,12 @@ import os
 if os.path.exists("source.csv"):
     df=pd.read_csv("source.csv", index_col=None)
 
-if os.path.exists("model"):
-    model=load_model('model')
+#if os.path.exists("model"):
+#    model=load_model('model')
 
 st.title("Classification Model")
 with st.sidebar:
-    opt  = st.radio("Choose the step below:",("Upload file", "Modeling","Predict"))
+    opt  = st.radio("Choose the step below:",("Upload file", "Data Analysis", "Modeling","Predict"))
     st.write(opt)
 
 if opt == "Upload file":
@@ -44,14 +46,14 @@ if opt == "Upload file":
 
 
 
-#if opt =="Data Analysis":
-#    gen = st.button("Generate Report")
-#    down = st.button("Download Report")
-#    if gen:
-#        pr = df.head(50).profile_report()
-#        st_profile_report(pr)
-#    if down:
-#        pr.to_file("Analysis.html")
+if opt =="Data Analysis":
+    gen = st.button("Generate Report")
+    down = st.button("Download Report")
+    if gen:
+        pr = ProfileReport(df.head(50))
+        st_profile_report(pr)
+    if down:
+        pr.to_file("Analysis.html")
 
 
 if opt=="Modeling":
@@ -72,12 +74,12 @@ if opt=="Modeling":
         st.info("Models")
         mod = pull()
         st.dataframe(mod, use_container_width=True)
-        #slm = st.selectbox("Choose model to save: ",mod['Model'])
-        #if st.button("Save Model"):
-        #    m = mod[mod['Model']==slm].index
-        #    model=create_model(m) 
-        save_model(best,"model")   
-        st.info("Model Saved") 
+        slm = st.selectbox("Choose model to save: ",mod['Model'])
+        if st.button("Save Model"):
+            m = mod[mod['Model']==slm].index
+            model=create_model(m) 
+            save_model(best,"model")   
+            st.info("Model Saved") 
 
         #chart = st.selectbox("Select Validation report: ",('pipeline','auc','threshold','pr','confusion_matrix','error',
         #'boundary','rfe','learning','manifold','calibration','vc','dimension','feature','feature_all','parameter',
